@@ -7,7 +7,9 @@ var TransactionSchema = mongoose.Schema({
 	tag: {type: String},
 	cost: {type: Number, required: true}
 });
-
+/*
+	This method returns all information in the database ordered by date
+*/
 TransactionSchema.statics.getAllTransactions = function(callback){
 	this.find({})
 		.sort({date: -1})
