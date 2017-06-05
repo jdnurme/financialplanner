@@ -11,10 +11,29 @@ var Transaction = require("../models/transactions");
  *	@failure: renders error page with error message
 */
 router.get('/', function(req, res, next) {
-	res.render('index', {title: "Financial Planner", message: "let's get our finances under control ;)"});
+	var timeUnit = 30;
+	//Grab Time Unit from filter parameters
+	Transaction.getAllTransactions(function(err, info){
+		res.render('index', {
+			title: "Financial Planner",
+			message: "let's get our finances under control ;)",
+			items: info
+			});
+
+	})
 });
 router.post('/add', function(req, res, next) {
-	res.redirect('/');
+	var cost = req.body.cost;
+	var tag = req.body.tag;
+	var item = req.body.item;
+	Transaction.inputItem(cost, tag, item, function(err){
+		if (err){
+			res.send(err);
+		}
+		else{
+			res.redirect('/');
+		}
+	})
 });
 
 module.exports = router;

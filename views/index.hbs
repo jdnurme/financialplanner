@@ -7,3 +7,10 @@
 	<input type="text" id="cost" name="cost" placeholder="cost"/>
 	<input type="submit" value="submit"/>
 </form>
+<ul>
+{{#each items}}
+	<li>
+	{{this.item}} and {{this.cost}}
+	</li>
+{{/each}}
+</ul>
